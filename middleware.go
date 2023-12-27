@@ -200,7 +200,7 @@ func (ps *FiberPrometheus) Middleware(ctx *fiber.Ctx) error {
 		status = ctx.Response().StatusCode()
 	}
 
-	path := ctx.Route().Path
+	path := string(ctx.Request().URI().Path())
 
 	statusCode := strconv.Itoa(status)
 	ps.requestsTotal.WithLabelValues(statusCode, method, path).Inc()
